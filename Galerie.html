@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="de">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Galerie - Folk4Fun</title>
+    <link rel="icon" href="Logo.ico" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    <style>
+        /* Stile und Navbar*/
+        /* Navbar */
+        .navbar {
+            position: fixed; /* Feste Positionierung */
+            top: 0;
+            width: 100%;
+            z-index: 1031; /* Über anderen Elementen */
+            transition: transform 0.4s ease, background-color 0.3s ease; /* Sanfte Übergänge */
+            transform: translateY(0); /* Startposition: sichtbar */
+        }
+
+        .navbar-transparent {
+            background-color: rgba(248, 249, 250, 0.8) !important; /* Leicht transparenter Hintergrund */
+        }
+
+        .navbar-colored {
+            background-color: rgba(248, 249, 250, 0.95) !important; /* Farbig beim Scrollen */
+        }
+
+        .navbar-hidden {
+            transform: translateY(-100%); /* Nach oben ausblenden */
+        }
+
+        #hover-zone {
+            position: fixed; /* Für Hover-Effekt über der Navbar */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            z-index: 1030; /* Unter der Navbar */
+            pointer-events: auto; /* Reagiert auf Mausbewegungen */
+            background-color: transparent; /* Unsichtbar */
+        }
+
+        /* Karussell-Stile */
+        .carousel-item img {
+            object-fit: contain; /* Bildanpassung beibehalten */
+            max-height: 400px; /* Maximale Höhe */
+            width: 100%;
+        }
+
+        @media (max-width: 767.98px) {
+            .carousel-item img {
+                max-height: 300px; /* Kleinere max. Höhe für Mobilgeräte */
+            }
+        }
+
+        /* --- Sticky Footer Styles --- */
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Mindesthöhe für den gesamten Bildschirm */
+        }
+
+        .main-content {
+            flex: 1; /* Hauptinhalt dehnt sich aus */
+        }
+
+        /* Footer */
+        footer {
+            background-color: #f8f9fa; /* Heller Hintergrund */
+            padding: 1rem 0;
+            margin-top: 3rem; /* Abstand zum Hauptinhalt */
+            text-align: center;
+        }
+
+        footer .container {
+            max-width: 1200px; /* Maximale Breite des Containers */
+            padding: 0 15px;
+        }
+
+        footer .row {
+            display: flex;
+            justify-content: space-between; /* Verteilung der Elemente */
+            align-items: center;
+        }
+
+        footer .list-inline {
+            margin-bottom: 0; /* Entfernt Standard-Margin */
+        }
+
+        footer .list-inline-item {
+            margin: 0 0.5rem; /* Abstand zwischen Listenelementen */
+        }
+
+        footer a {
+            text-decoration: none; /* Entfernt Unterstreichung */
+            color: #6c757d;
+        }
+
+        footer a:hover {
+            color: #000; /* Farbe bei Mausberührung */
+        }
+
+        footer small {
+            color: #6c757d; /* Farbe für Copyright-Hinweis */
+        }
+
+        @media (max-width: 768px) {
+            footer .row {
+                flex-direction: column; /* Spalten auf Mobilgeräten stapeln */
+                text-align: center;
+            }
+
+            footer .col-md-3, footer .col-md-6 {
+                width: 100%; /* Volle Breite auf Mobilgeräten */
+                margin-bottom: 10px;
+            }
+
+            footer .list-inline {
+                margin-bottom: 10px;
+            }
+
+            footer .list-inline-item {
+                margin: 0 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="hover-zone"></div> 
+    <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top"> <!--Navbar Anfang-->
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="Folk_Four_Fun_Logo.png" alt="Folk4Fun Logo" height="30">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="html.html">Historie</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Personalien.HTML">Über uns</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Aktuelles.html">Aktuelles</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="Galerie.html">Galerie</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Termine.html">Termine</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Anderes
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="kontakt.html">Kontakt</a></li>
+                            <li><a class="dropdown-item" href="impressum.html">Impressum</a></li>
+                        
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <main class="main-content">  <!--Karussel Anfang-->
+        <br>
+        <br>
+         <div class="container mt-5 text-center">
+            <p class="lead">Hier sind unsere schönsten Bilder von unseren Auftritten und Touren!</p>
+        </div>
+        <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel" data-bs-interval="3000">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="4" aria-label="Slide 5"></button>
+                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="5" aria-label="Slide 6"></button>
+                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="6" aria-label="Slide 7"></button>
+                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="7" aria-label="Slide 8"></button>
+                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="8" aria-label="Slide 9"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active" data-bs-interval="10000">
+                    <img src="Galerie/Galerie_01.JPG" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                    </div>
+                </div>
+                <div class="carousel-item" data-bs-interval="2000">
+                    <img src="Galerie/Galerie_02.JPG" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="Galerie/Galerie_03.JPG" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="Galerie/Galerie_04.JPG" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="Galerie/Galerie_05.JPG" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="Personen/Britta_01.JPG" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="Personen/Manfred.JPG" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="Personen/Udo.JPG" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="Galerie/Britta_02.jpg" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <style>
+        /* Fullscreen Overlay */
+        .fullscreen-overlay {
+            position: fixed; /* Volle Bildschirmabdeckung */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9); /* Dunkler Hintergrund */
+            z-index: 1000; /* Über allen anderen Elementen */
+            display: flex;
+            justify-content: center; /* Zentrierung */
+            align-items: center;
+            cursor: pointer; /* Cursorhinweis */
+        }
+
+        .fullscreen-overlay img {
+            max-width: 90%; /* Maximale Bildgröße */
+            max-height: 90%;
+            object-fit: contain; /* Skalierung beibehalten */
+        }
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const carousel = document.getElementById('carouselExampleDark');
+            const carouselInner = carousel.querySelector('.carousel-inner');
+            const carouselItems = carouselInner.querySelectorAll('.carousel-item');
+            const carouselImages = carouselInner.querySelectorAll('.carousel-item img');
+            const indicators = carousel.querySelector('.carousel-indicators');
+            const body = document.body;
+            let currentIndex = 0;
+            let autoSlideInterval;
+            const inactivityTimeout = 5000; // Timeout für Inaktivität
+            let inactivityTimer;
+            let isFullscreenOpen = false;
+
+            // --- Auto-Slide Funktionen ---
+            function startAutoSlide() {
+                if (!isFullscreenOpen) {
+                    autoSlideInterval = setInterval(() => {
+                        carousel.carousel('next'); // Zum nächsten Bild
+                    }, 3000);
+                }
+            }
+
+            function stopAutoSlide() {
+                clearInterval(autoSlideInterval);
+            }
+
+            function resetInactivityTimer() {
+                clearTimeout(inactivityTimer);
+                inactivityTimer = setTimeout(startAutoSlide, inactivityTimeout); // Timer starten
+            }
+
+            startAutoSlide(); // Auto-Slide starten
+            resetInactivityTimer(); // Timer starten
+
+            // --- Event Listener für Karussell-Interaktion ---
+            indicators.addEventListener('click', () => {
+                stopAutoSlide();
+                resetInactivityTimer(); // Timer zurücksetzen
+            });
+
+            carousel.addEventListener('mouseenter', () => {
+                stopAutoSlide(); // Auto-Slide stoppen
+                clearTimeout(inactivityTimer);
+            });
+
+            carousel.addEventListener('mouseleave', () => {
+                resetInactivityTimer(); // Timer zurücksetzen
+            });
+
+            function getActiveIndex() {
+                const activeItem = carouselInner.querySelector('.carousel-item.active');
+                return Array.from(carouselItems).indexOf(activeItem);
+            }
+
+            // --- Fullscreen-Funktionalität ---
+            carouselImages.forEach(img => {
+                img.addEventListener('click', function() {
+                    isFullscreenOpen = true;
+                    stopAutoSlide(); // Auto-Slide stoppen
+
+                    currentIndex = getActiveIndex();
+                    const overlay = document.createElement('div');
+                    overlay.classList.add('fullscreen-overlay');
+                    overlay.style.position = 'fixed';
+                    overlay.style.top = 0;
+                    overlay.style.left = 0;
+                    overlay.style.width = '100%';
+                    overlay.style.height = '100%';
+                    overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
+                    overlay.style.zIndex = 1000;
+                    overlay.style.display = 'flex';
+                    overlay.style.justifyContent = 'center';
+                    overlay.style.alignItems = 'center';
+                    overlay.style.cursor = 'pointer';
+
+                    const fullImg = document.createElement('img');
+                    fullImg.src = this.src;
+                    fullImg.style.maxWidth = '90%';
+                    fullImg.style.maxHeight = '90%';
+                    fullImg.style.objectFit = 'contain';
+
+                    overlay.appendChild(fullImg);
+                    body.appendChild(overlay);
+                    body.style.overflow = 'hidden'; // Scrollen verhindern
+
+                    overlay.addEventListener('click', function() {
+                        isFullscreenOpen = false;
+                        body.removeChild(overlay);
+                        body.style.overflow = 'auto'; // Scrollen wieder aktivieren
+                        resetInactivityTimer(); // Timer zurücksetzen
+                    });
+                });
+            });
+
+            function updateFullscreenImage(index) {
+                const fullscreenOverlay = document.querySelector('.fullscreen-overlay');
+                const fullscreenImg = fullscreenOverlay ? fullscreenOverlay.querySelector('img') : null;
+                if (fullscreenImg && carouselImages[index]) {
+                    fullscreenImg.src = carouselImages[index].src;
+                    currentIndex = index;
+                }
+            }
+
+            document.addEventListener('keydown', function(event) {
+                const fullscreenOverlay = document.querySelector('.fullscreen-overlay');
+                if (fullscreenOverlay) {
+                    if (event.key === 'ArrowLeft') {
+                        currentIndex = Math.max(0, currentIndex - 1);
+                        updateFullscreenImage(currentIndex);
+                    } else if (event.key === 'ArrowRight') {
+                        currentIndex = Math.min(carouselImages.length - 1, currentIndex + 1);
+                        updateFullscreenImage(currentIndex);
+                    } else if (event.key === 'Escape') {
+                        isFullscreenOpen = false;
+                        const overlay = document.querySelector('.fullscreen-overlay');
+                        if (overlay) {
+                            body.removeChild(overlay);
+                            body.style.overflow = 'auto';
+                            resetInactivityTimer();
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+
+<footer class="bg-light py-3 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 text-center text-md-start">
+                    <a class="navbar-brand" href="#">Folk4Fun</a>
+                </div>
+                <div class="col-md-6 text-center">
+                    <ul class="list-inline mb-0">
+                        <li class="list-inline-item"><a href="html.html" class="nav-link text-muted">Startseite</a></li>
+                        <li class="list-inline-item"><a href="Personalien.HTML" class="nav-link text-muted">Über uns</a></li>
+                        <li class="list-inline-item"><a href="Termine.html" class="nav-link text-muted">Termine</a></li>
+                        <li class="list-inline-item"><a href="kontakt.html" class="nav-link text-muted">Kontakt</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-12 text-center text-muted">
+                    <small>© 2025 Your Website. All Rights Reserved.  | <a href="impressum.html" class="text-muted">Impressum</a></small>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

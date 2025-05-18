@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Termine - Folk4Fun</title>
+    <link rel="icon" href="Logo.ico" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    <style>
+      
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1031;
+            transition: transform 0.4s ease, background-color 0.3s ease;
+            transform: translateY(0);
+        }
+
+        .navbar-transparent {
+            background-color: rgba(248, 249, 250, 0.8) !important;
+        }
+
+        .navbar-colored {
+            background-color: rgba(248, 249, 250, 0.95) !important;
+        }
+
+        .navbar-hidden {
+            transform: translateY(-100%);
+        }
+
+        #hover-zone {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            z-index: 1030;
+            pointer-events: auto;
+            background-color: transparent;
+        }
+
+        .termin-eintrag {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap; /* Ermöglicht Umbruch bei kleinen Bildschirmen */
+            padding: 0.75rem; /* Etwas mehr Innenabstand */
+        }
+
+        .termin-details {
+            flex-grow: 1;
+            margin-bottom: 0.5rem; /* Etwas Abstand zum Button auf kleinen Bildschirmen */
+        }
+
+        .termin-button-badge-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .termin-button {
+            margin-right: 0.75rem; 
+            margin-bottom: 0.5rem; /* Abstand zum Badge auf kleinen Bildschirmen */
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Stellt sicher, dass der body mindestens die Höhe des Viewports hat */
+        }
+
+        .main-content {
+            flex-grow: 1; /* Lässt diesen Bereich den verfügbaren Platz zwischen Header und Footer einnehmen */
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start; /* Inhalt am oberen Rand des verfügbaren Platzes ausrichten */
+            align-items: center; /* Zentriert den Inhalt horizontal */
+            padding-top: 65px; /* Angepasster oberer Abstand für die fixe Navbar */
+            padding-bottom: 20px; /* Weniger Padding unten, da der Footer nicht mehr fixiert ist */
+        }
+
+        .centered-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 95%; /* Etwas breiter auf kleinen Bildschirmen */
+            max-width: 600px; /* Optionale maximale Breite */
+        }
+
+        .termin-list {
+            width: 100%; /* Nimmt die volle Breite des centered-content an */
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 1rem; /* Etwas Abstand zur folgenden Überschrift */
+        }
+
+        .title-container {
+            text-align: center;
+            margin-bottom: 2rem; /* Mehr Abstand zum folgenden Inhalt */
+        }
+
+        .new-termin-hint {
+            margin-top: 2rem;
+            color: #6c757d; /* Graue Farbe für den Hinweis */
+            text-align: center;
+        }
+
+      
+        footer {
+            background-color: #f8f9fa;
+            padding: 1rem 0;
+            margin-top: 3rem; /* Abstand zum Hauptinhalt */
+            text-align: center;
+            width: 100%; /* Stellt sicher, dass der Footer die volle Breite einnimmt */
+        }
+
+        footer .container {
+            max-width: 1200px;
+            padding: 0 15px;
+        }
+
+        footer .row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap; /* Für bessere Darstellung auf kleinen Bildschirmen */
+        }
+
+        footer .col-md-3,
+        footer .col-md-6 {
+            margin-bottom: 10px; /* Abstand zwischen den Spalten auf kleinen Bildschirmen */
+            text-align: center; /* Zentriert Text in den Spalten auf kleinen Bildschirmen */
+        }
+
+        @media (min-width: 768px) {
+            footer .col-md-3 {
+                text-align: left;
+            }
+            footer .col-md-6 {
+                text-align: center;
+            }
+        }
+
+        footer .list-inline {
+            margin-bottom: 0;
+        }
+
+        footer .list-inline-item {
+            margin: 0 0.5rem;
+        }
+
+        footer a {
+            text-decoration: none;
+            color: #6c757d;
+        }
+
+        footer a:hover {
+            color: #000;
+        }
+
+        footer small {
+            color: #6c757d;
+        }
+
+        /*  Handy-Ansicht Anpassungen */
+        @media (max-width: 767.98px) {
+            body {
+                padding-top: 55px; /* Angepasster Platz für die kleinere mobile Navbar */
+            }
+            .main-content {
+                padding-top: 55px; /* Angepasster oberer Abstand für die kleinere mobile Navbar */
+            }
+            #hover-zone {
+                display: none; /* Hover-Effekt ist auf Touchscreens nicht relevant */
+            }
+            .navbar-brand img {
+                height: 25px; /* Kleineres Logo für Mobilgeräte */
+            }
+            .navbar-toggler {
+                font-size: 0.8rem;
+                padding: 0.25rem 0.5rem;
+            }
+            .navbar-nav {
+                margin-top: 0.5rem;
+            }
+            .nav-item {
+                margin-bottom: 0.25rem;
+            }
+            footer .container {
+                max-width: 100%; /* Footer nimmt volle Breite ein */
+                padding: 1rem 15px; /* Standard Padding beibehalten */
+            }
+            footer .row {
+                display: block; /* Untereinander anzeigen auf Mobilgeräten */
+                text-align: center;
+            }
+            footer .col-md-3,
+            footer .col-md-6 {
+                width: 100%; /* Volle Breite für die Spalten auf Mobilgeräten */
+                margin-bottom: 10px;
+            }
+            footer .list-inline {
+                display: flex;
+                flex-direction: column; /* Links untereinander anordnen */
+                align-items: center; /* Links zentrieren */
+            }
+            footer .list-inline-item {
+                margin: 0.25rem 0; /* Vertikalen Abstand zwischen den Links */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="hover-zone"></div>
+
+    <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="Folk_Four_Fun_Logo.png" alt="Folk4Fun Logo" height="30">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="html.html">Historie</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Personalien.HTML">Über uns</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Aktuelles.html">Aktuelles</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Galerie.html">Galerie</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="Termine.html">Termine</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Anderes
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="Kontakt.html">Kontakt</a></li>
+                            <li><a class="dropdown-item" href="Impressum.html">Impressum</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <div class="centered-content">
+            <div class="title-container">
+                <h1 class="page-title">Unsere Termine</h1>
+            </div>
+            <p>Hier finden Sie eine Übersicht unserer kommenden Auftritte und Veranstaltungen:</p>
+            <ul class="list-group mt-4 termin-list">
+                <li class="list-group-item d-flex justify-content-between align-items-center termin-eintrag">
+                    <div class="termin-details">
+                        <div class="fw-bold">08. Mai 2025</div>
+                        Melsdorf - 14:00 - 16:00 Uhr
+                    </div>
+                    <div class="termin-button-badge-container">
+                        <div class="termin-button">
+                            <a href="Melsdorf.html" class="btn btn-primary btn-sm">Mehr erfahren</a>
+                        </div>
+                        <span class="badge bg-primary rounded-pill">Veranstaltung</span>
+                    </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center termin-eintrag">
+                    <div class="termin-details">
+                        <div class="fw-bold">22. Juni 2025 (Platzhalter)</div>
+                        Melsdorf - 14:00 - 16:00 Uhr
+                    </div>
+                    <div class="termin-button-badge-container">
+                        <div class="termin-button">
+                            <a href="#" class="btn btn-primary btn-sm">Mehr erfahren</a>
+                        </div>
+                        <span class="badge bg-success rounded-pill">Veranstaltung</span>
+                    </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center termin-eintrag">
+                    <div class="termin-details">
+                        <div class="fw-bold">15. Juli 2025 (Platzhalter)</div>
+                        Melsdorf - 14:00 - 16:00 Uhr
+                    </div>
+                    <div class="termin-button-badge-container">
+                        <div class="termin-button">
+                            <a href="#" class="btn btn-primary btn-sm">Mehr erfahren</a>
+                        </div>
+                        <span class="badge bg-info rounded-pill">Veranstaltung</span>
+                    </div>
+                </li>
+            </ul>
+            <p class="new-termin-hint">Neue Termine folgen...</p>
+        </div>
+    </div>
+
+    <footer class="bg-light py-3 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 text-center text-md-start">
+                    <a class="navbar-brand" href="#">Folk4Fun</a>
+                </div>
+                <div class="col-md-6 text-center">
+                    <ul class="list-inline mb-0">
+                        <li class="list-inline-item"><a href="html.html" class="nav-link text-muted">Startseite</a></li>
+                        <li class="list-inline-item"><a href="Personalien.HTML" class="nav-link text-muted">Über uns</a></li>
+                        <li class="list-inline-item"><a href="Termine.html" class="nav-link text-muted">Termine</a></li>
+                        <li class="list-inline-item"><a href="kontakt.html" class="nav-link text-muted">Kontakt</a></li>
+                        <li class="list-inline-item"><a href="Impressum.html" class="nav-link text-muted">Impressum</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-12 text-center text-muted">
+                    <small>© 2025 Your Website. All Rights Reserved.| <a href="impressum.html" class="text-muted">Impressum</a></small>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const navbar = document.querySelector('.navbar');
+            const hoverZone = document.getElementById('hover-zone');
+            let lastScrollTop = 0;
+
+            navbar.classList.add('navbar-transparent');
+
+            function handleScroll() {
+                const scrollTop = window.scrollY;
+
+                // Navbar Farbe ändern beim Scrollen
+                if (scrollTop > 50) {
+                    navbar.classList.remove('navbar-transparent');
+                    navbar.classList.add('navbar-colored');
+                } else {
+                    navbar.classList.remove('navbar-colored');
+                    navbar.classList.add('navbar-transparent');
+                }
+
+                // Navbar ausblenden/einblenden
+                if (scrollTop > lastScrollTop && scrollTop > 50) {
+                    navbar.classList.add('navbar-hidden');
+                } else {
+                    navbar.classList.remove('navbar-hidden');
+                }
+                lastScrollTop = scrollTop;
+            }
+
+            window.addEventListener('scroll', handleScroll);
+
+            hoverZone.addEventListener('mouseenter', () => {
+                navbar.classList.remove('navbar-hidden');
+            });
+        });
+    </script>
+
+</body>
+</html>

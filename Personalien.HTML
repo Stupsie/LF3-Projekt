@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personalien - Folk4Fun</title>
+    <link rel="icon" href="Logo.ico" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Globale Stile*/
+        body {
+            overflow-x: hidden; /* Verhindert horizontalen Scrollbalken */
+        }
+
+        /*  Animationsstile  */
+        @keyframes fadeIn {
+            from {
+                opacity: 0; /* Startet mit Transparenz 0 */
+                transform: translateY(10px); /* Startet 10px unterhalb der normalen Position */
+            }
+            to {
+                opacity: 1; /* Endet mit voller Deckkraft */
+                transform: translateY(0); /* Endet an der normalen Position */
+            }
+        }
+
+        /* Personalien-Eintrag Stile*/
+        .personalien-eintrag {
+            opacity: 0; /* Startet mit Transparenz 0 */
+            animation: fadeIn 1s ease-in-out forwards; /* Fügt die fadeIn-Animation hinzu */
+            display: flex; /* Nutzt Flexbox für einfaches Layout */
+            align-items: center; /* Zentriert die Elemente vertikal */
+            margin-bottom: 2rem; /* Abstand zum nächsten Eintrag */
+        }
+
+        .personalien-eintrag .col-md-4 {
+            height: 350px; /* Feste Höhe für den Bildcontainer */
+            display: flex; /* Flexbox für Bildzentrierung */
+            justify-content: center; /* Zentriert Bild horizontal */
+            align-items: center; /* Zentriert Bild vertikal */
+            overflow: hidden; /* Schneidet überstehende Bildteile ab */
+            cursor: pointer; /* Zeigt einen Zeiger-Cursor beim Überfahren */
+            padding-right: 20px;
+        }
+
+        .personalien-eintrag .col-md-4 img {
+            width: auto; /* Breite passt sich dem Inhalt an */
+            height: 100%; /* Höhe füllt den Container */
+            object-fit: cover; /* Skaliert und schneidet das Bild, um den Container zu füllen */
+            cursor: pointer; /* Zeigt einen Zeiger-Cursor beim Überfahren */
+        }
+
+        .personalien-eintrag .col-md-8 {
+            padding-left: 15px; /* Abstand zum Text neben dem Bild */
+        }
+
+        /* Navbar Stile  */
+        .navbar {
+            position: fixed; /* Fixiert die Navbar am oberen Rand */
+            top: 0; /* Positioniert am oberen Rand */
+            width: 100%; /* Volle Breite des Viewports */
+            z-index: 1031; /* Hoher Z-Index, um über anderen Elementen zu liegen */
+            transition: transform 0.4s ease, background-color 0.3s ease; /* Sanfte Übergänge für Transformation und Hintergrundfarbe */
+            transform: translateY(0); /* Startposition */
+        }
+
+        .navbar-transparent {
+            background-color: rgba(248, 249, 250, 0.8) !important; /* Transparenter Hintergrund */
+        }
+
+        .navbar-colored {
+            background-color: rgba(248, 249, 250, 0.95) !important; /* Leicht transparenter, farbiger Hintergrund */
+        }
+
+        .navbar-hidden {
+            transform: translateY(-100%); /* Nach oben aus dem Viewport schieben */
+        }
+
+        #hover-zone {
+            position: fixed; /* Fixiert die Hover-Zone am oberen Rand */
+            top: 0; /* Positioniert am oberen Rand */
+            left: 0;
+            width: 100%; /* Volle Breite */
+            height: 60px; /* Höhe der Hover-Zone */
+            z-index: 1030; /* Z-Index etwas niedriger als die Navbar */
+            pointer-events: auto; /* Erlaubt Mausinteraktionen */
+            background-color: transparent; /* Transparenter Hintergrund */
+        }
+
+        /* --- Modal Stile --- */
+        .modal {
+            display: none; /* Standardmäßig nicht anzeigen */
+            position: fixed; /* Fixiert das Modal im Viewport */
+            z-index: 1; /* Sehr hoher Z-Index */
+            left: 0;
+            top: 0;
+            width: 100%; /* Volle Breite */
+            height: 100%; /* Volle Höhe */
+            overflow: auto; /* Erlaubt Scrollen, falls Inhalt zu groß ist */
+            background-color: rgba(0,0,0,0.9); /* Dunkler, fast schwarzer Hintergrund mit Transparenz */
+        }
+
+        .modal-content {
+            margin: auto; /* Zentriert den Inhalt horizontal und vertikal */
+            display: block; /* Als Block anzeigen */
+            width: 90%; /* Breite des Inhalts im Modal */
+            max-width: 90%; /* Maximale Breite des Inhalts */
+            max-height: 90%; /* Maximale Höhe des Inhalts */
+            object-fit: contain; /* Skaliert das Bild, um es vollständig anzuzeigen */
+            animation-name: zoom; /* Verwendet die Zoom-Animation */
+            animation-duration: 0.6s; /* Dauer der Zoom-Animation */
+        }
+
+        @-webkit-keyframes zoom {
+            from {-webkit-transform:scale(0)} /* Startet mit Skalierung 0 */
+            to {-webkit-transform:scale(1)} /* Endet mit Skalierung 1 */
+        }
+
+        @keyframes zoom {
+            from {transform:scale(0)} /* Startet mit Skalierung 0 */
+            to {transform:scale(1)} /* Endet mit Skalierung 1 */
+        }
+
+        .close {
+            position: absolute; /* Absolut positioniert innerhalb des Modals */
+            top: 15px; /* Abstand vom oberen Rand */
+            right: 35px; /* Abstand vom rechten Rand */
+            color: #f1f1f1; /* Weiße Farbe */
+            font-size: 30px; /* Schriftgröße */
+            font-weight: bold; /* Fetter Text */
+            transition: 0.3s; /* Sanfter Übergang für Hover-Effekt */
+            cursor: pointer; /* Zeiger-Cursor */
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #bbb; /* Hellgraue Farbe bei Hover/Fokus */
+            text-decoration: none; /* Keine Unterstreichung */
+        }
+
+        /* --- Media Query für Mobilgeräte --- */
+        @media (max-width: 768px) {
+            .personalien-eintrag {
+                flex-direction: column; /* Stapelt die Elemente untereinander */
+                text-align: center; /* Zentriert den Text */
+                margin-bottom: 1.5rem; /* Reduzierter Abstand */
+            }
+
+            .personalien-eintrag .col-md-4 {
+                width: 80%; /* Breite des Bildcontainers */
+                height: auto; /* Automatische Höhe */
+                margin: 0 auto 1rem; /* Zentriert und fügt Abstand hinzu */
+                padding-right: 0; /* Entfernt rechtes Padding */
+            }
+
+            .personalien-eintrag .col-md-8 {
+                padding-left: 0; /* Entfernt linkes Padding */
+            }
+
+            h2 {
+                font-size: 1.5rem; /* Kleinere Überschrift */
+            }
+
+            p {
+                font-size: 1rem; /* Kleinere Textgröße */
+            }
+
+            .modal-content {
+                width: 95%;
+                max-width: 95%;
+                max-height: 95%;
+            }
+
+            .close {
+                top: 10px;
+                right: 20px;
+                font-size: 24px;
+            }
+        }
+
+        /* für noch kleinere Bildschirme */
+        @media (max-width: 400px) {
+          .personalien-eintrag .col-md-4 {
+             width: 95%;
+          }
+        }
+    </style>
+</head>
+<body>
+    <div id="hover-zone"></div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="Folk_Four_Fun_Logo.png" alt="Folk4Fun Logo" height="30">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="html.html">Historie</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="Personalien.HTML">Über uns</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Aktuelles.html">Aktuelles</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Galerie.html">Galerie</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Termine.html">Termine</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Anderes
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="kontakt.html">Kontakt</a></li>
+                            <li><a class="dropdown-item" href="impressum.html">Impressum</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <script>
+       
+        document.addEventListener('DOMContentLoaded', function () {
+            const navbar = document.querySelector('.navbar');
+            const hoverZone = document.getElementById('hover-zone');
+            let scrollTimeout;
+            let isHovering = false;
+            let isInteracting = false;
+
+            navbar.classList.add('navbar-transparent');
+
+            function showNavbar() {
+                navbar.classList.remove('navbar-hidden');
+            }
+
+            function hideNavbar() {
+                if (!isHovering && !isInteracting) {
+                    navbar.classList.add('navbar-hidden');
+                }
+            }
+
+            window.addEventListener('scroll', () => {
+                showNavbar();
+                if (window.scrollY > 50) {
+                    navbar.classList.remove('navbar-transparent');
+                    navbar.classList.add('navbar-colored');
+                } else {
+                    navbar.classList.remove('navbar-colored');
+                    navbar.classList.add('navbar-transparent');
+                }
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(() => {
+                    hideNavbar();
+                }, 2500);
+            });
+
+            hoverZone.addEventListener('mouseenter', () => {
+                isHovering = true;
+                showNavbar();
+            });
+
+            hoverZone.addEventListener('mouseleave', () => {
+                isHovering = false;
+            });
+
+            navbar.addEventListener('mouseenter', () => {
+                isHovering = true;
+                showNavbar();
+            });
+
+            navbar.addEventListener('mouseleave', () => {
+                isHovering = false;
+                setTimeout(() => {
+                    hideNavbar();
+                }, 1500);
+            });
+
+            navbar.addEventListener('mousedown', () => {
+                isInteracting = true;
+            });
+
+            navbar.addEventListener('mouseup', () => {
+                setTimeout(() => {
+                    isInteracting = false;
+                }, 2000);
+            });
+        });
+
+        
+        document.addEventListener('DOMContentLoaded', function () {
+            const modal = document.createElement('div');
+            modal.classList.add('modal');
+            modal.id = 'imgModal';
+            document.body.appendChild(modal);
+
+            const modalImg = document.createElement('img');
+            modalImg.classList.add('modal-content');
+            modal.appendChild(modalImg);
+
+            const closeBtn = document.createElement('span');
+            closeBtn.classList.add('close');
+            closeBtn.innerHTML = '&times;';
+            modal.appendChild(closeBtn);
+
+            function openModal(imgSrc) {
+                modal.style.display = "block";
+                modalImg.src = imgSrc;
+            }
+
+            closeBtn.onclick = function() {
+                modal.style.display = "none";
+            }
+
+            const imageContainers = document.querySelectorAll('.personalien-eintrag .col-md-4');
+            imageContainers.forEach(container => {
+                container.onclick = function() {
+                    const img = this.querySelector('img');
+                    if (img) {
+                        openModal(img.src);
+                    }
+                }
+            });
+        });
+    </script>
+    <div class="container mt-4">
+        <div class="row personalien-eintrag mb-4">
+            <div class="col-md-4">
+                <img src="Personen/Britta_01.JPG" class="img-fluid rounded" alt="Britta">
+            </div>
+            <div class="col-md-8">
+                <h2>Britta</h2>
+                <p>Britta lernt das erste Musizieren in früher Kindheit auf einer Timple in Spanien. Sie spielt Ukulele, Klavier, Cello und erfreut die Zuhörer mit ihrem Gesang.</p>
+            </div>
+        </div>
+        <hr class="my-4">
+        <div class="row personalien-eintrag mb-4">
+            <div class="col-md-4">
+                <img src="Personen/Udo.JPG" class="img-fluid rounded" alt="Udo">
+            </div>
+            <div class="col-md-8">
+                <h2>Udo</h2>
+                <p>Udo spielt meisterhaft Mundharmonika und spielt Mandoline.</p>
+            </div>
+        </div>
+        <hr class="my-4">
+        <div class="row personalien-eintrag mb-4">
+            <div class="col-md-4">
+                <img src="Personen/Manfred.JPG" class="img-fluid rounded" alt="Manfred">
+            </div>
+            <div class="col-md-8">
+                <h2>Manfred</h2>
+                <p>Manfred begleitet uns mit dem Banjo oder der Gitarre.</p>
+            </div>
+        </div>
+        <hr class="my-4">
+        <div class="row personalien-eintrag mb-4">
+            <div class="col-md-4">
+                <img src="Folk4Fun.JPG" class="img-fluid rounded" alt="Thomas">
+            </div>
+            <div class="col-md-8">
+                <h2>Thomas</h2>
+                <p>Thomas(rechts) spielt Gitarre und Irish Bouzouki und singt dazu.</p>
+            </div>
+        </div>
+    </div>
+    <footer class="bg-light py-3 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 text-center text-md-start">
+                    <a class="navbar-brand" href="#">Folk4Fun</a>
+                </div>
+                <div class="col-md-6 text-center">
+                    <ul class="list-inline mb-0">
+                        <li class="list-inline-item"><a href="html.html" class="nav-link text-muted">Startseite</a></li>
+                        <li class="list-inline-item"><a href="Personalien.HTML" class="nav-link text-muted">Über uns</a></li>
+                        <li class="list-inline-item"><a href="Termine.html" class="nav-link text-muted">Termine</a></li>
+                        <li class="list-inline-item"><a href="kontakt.html" class="nav-link text-muted">Kontakt</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-12 text-center text-muted">
+                    <small>© 2025 Your Website. All Rights Reserved.  | <a href="impressum.html" class="text-muted">Impressum</a></small>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

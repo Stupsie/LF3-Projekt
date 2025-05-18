@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="de">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Kontakt - Folk4Fun</title>
+    <link rel="icon" href="Logo.ico" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+       
+        body {
+            min-height: 100vh; /* Sorgt dafür, dass der Body mindestens die Höhe des Bildschirms hat */
+            padding-top: 60px; /* Platz für die fixierte Navbar am oberen Rand */
+            position: relative; /* Notwendig für die absolute Positionierung von Kindelementen */
+            display: flex; /* Flexbox-Layout verwenden */
+            flex-direction: column; /* Inhalt vertikal anordnen */
+            transform: none !important;  /* Verhindert unerwünschte Transformationen */
+        }
+        .container {
+            margin-top: 4rem; /* Oberen Rand des Containers anpassen */
+            flex-grow: 1; /* Sorgt dafür, dass sich der Container ausdehnt und den verfügbaren Platz einnimmt */
+            transform: none !important;  /* Verhindert unerwünschte Transformationen */
+        }
+
+        /* Navbar  */
+        .navbar {
+            position: fixed; /* Fixiert die Navbar am oberen Rand des Bildschirms */
+            top: 0;
+            width: 100%; /* Volle Bildschirmbreite */
+            z-index: 1031; /* Stellt sicher, dass die Navbar über anderen Elementen liegt */
+            transition: transform 0.4s ease, background-color 0.3s ease; /* Sanfte Übergänge für Animationen */
+            transform: translateY(0) !important; /* Setzt die Navbar an ihre ursprüngliche Position */
+        }
+        .navbar-transparent {
+            background-color: rgba(248, 249, 250, 0.8) !important; /* Transparenter Hintergrund */
+        }
+        .navbar-colored {
+            background-color: rgba(248, 249, 250, 0.95) !important; /* Leicht transparenter, farbiger Hintergrund */
+        }
+        .navbar-hidden {
+            transform: translateY(-100%) !important; /* Schiebt die Navbar aus dem sichtbaren Bereich nach oben */
+        }
+        #hover-zone {
+            position: fixed; /* Fixiert die Hover-Zone am oberen Rand */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60px; /* Entspricht der Höhe der Navbar */
+            z-index: 1030; /* Liegt direkt unter der Navbar */
+            pointer-events: auto; /* Ermöglicht Interaktion mit der Hover-Zone */
+            background-color: transparent; /* Unsichtbarer Hintergrund */
+            transform: none !important;  /* Verhindert unerwünschte Transformationen */
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: #f8f9fa; /* Hellgrauer Hintergrund für den Footer */
+            padding: 1rem 0; /* Innenabstand oben und unten */
+            text-align: center; /* Zentriert den Text im Footer */
+            width: 100%; /* Volle Breite des Bildschirms */
+            margin-top: 2rem; /* Oberer Rand des Footers */
+            transform: none !important;  /* Verhindert unerwünschte Transformationen */
+        }
+        footer .container {
+            max-width: 1200px; /* Maximale Breite des Containers im Footer */
+            padding: 0 15px; /* Innenabstand links und rechts */
+            transform: none !important;  /* Verhindert unerwünschte Transformationen */
+        }
+        footer .row {
+            display: flex; /* Flexbox-Layout für die Zeile im Footer */
+            justify-content: space-between; /* Verteilt die Elemente horizontal */
+            align-items: center; /* Zentriert die Elemente vertikal */
+            flex-wrap: wrap; /* Ermöglicht den Umbruch auf kleineren Bildschirmen */
+            transform: none !important;  /* Verhindert unerwünschte Transformationen */
+        }
+        footer .col-md-3,
+        footer .col-md-6 {
+            margin-bottom: 10px; /* Abstand unterhalb der Spalten */
+            text-align: center; /* Zentriert den Text in den Spalten */
+            transform: none !important;  /* Verhindert unerwünschte Transformationen */
+        }
+        @media (min-width: 768px) {
+            footer .col-md-3 {
+                text-align: left; /* Linksbündiger Text ab mittleren Bildschirmen */
+            }
+            footer .col-md-6 {
+                text-align: center; /* Zentrierter Text ab mittleren Bildschirmen */
+            }
+        }
+        footer .list-inline {
+            margin-bottom: 0; /* Entfernt den unteren Rand der Liste */
+            transform: none !important;  /* Verhindert unerwünschte Transformationen */
+        }
+        footer .list-inline-item {
+            margin: 0 0.5rem; /* Abstand zwischen den Listenelementen */
+            transform: none !important;  /* Verhindert unerwünschte Transformationen */
+        }
+        footer a {
+            text-decoration: none; /* Entfernt die Unterstreichung von Links */
+            color: #6c757d; /* Graue Farbe für Links */
+        }
+        footer a:hover {
+            color: #000; /* Schwarze Farbe für Links beim Überfahren mit der Maus */
+        }
+        footer small {
+            color: #6c757d; /* Graue Farbe für den Copyright-Hinweis */
+        }
+
+        /* --- Responsive Anpassungen --- */
+        @media (max-width: 767.98px) {
+            body {
+                padding-top: 0; /* Kein Padding oben auf kleinen Bildschirmen, um Navbar nicht zu verdecken */
+            }
+            .container {
+                margin-top: 1rem; /* Reduzierter oberer Rand für den Container auf kleinen Bildschirmen */
+            }
+            #hover-zone {
+                display: none; /* Blendet die Hover-Zone auf kleinen Bildschirmen aus, da Hover-Effekte dort nicht optimal sind */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="hover-zone"></div>
+
+    <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="Folk_Four_Fun_Logo.png" alt="Folk4Fun Logo" height="30">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="html.html">Historie</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Personalien.HTML">Über uns</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Aktuelles.html">Aktuelles</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Galerie.html">Galerie</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Termine.html">Termine</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Anderes
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="Impressum.html">Impressum</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <h1>Kontakt</h1>
+        <p>Hier finden Sie unsere Kontaktdaten:</p>
+        <p><strong>Thomas Krumm</strong><br>
+        E-Mail: <a href="mailto:tk-westernshop@t-online.de">tk-westernshop@t-online.de</a></p>
+    </div>
+
+    <footer class="bg-light py-3 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 text-center text-md-start">
+                    <a class="navbar-brand" href="#">Folk4Fun</a>
+                </div>
+                <div class="col-md-6 text-center">
+                    <ul class="list-inline mb-0">
+                        <li class="list-inline-item"><a href="html.html" class="nav-link text-muted">Startseite</a></li>
+                        <li class="list-inline-item"><a href="Personalien.HTML" class="nav-link text-muted">Über uns</a></li>
+                        <li class="list-inline-item"><a href="Termine.html" class="nav-link text-muted">Termine</a></li>
+                        <li class="list-inline-item"><a href="kontakt.html" class="nav-link text-muted">Kontakt</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-12 text-center text-muted">
+                    <small>© 2025 Your Website. All Rights Reserved. | <a href="impressum.html" class="text-muted">Impressum</a></small>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const navbar = document.querySelector('.navbar'); // Holt das Navbar-Element
+            const hoverZone = document.getElementById('hover-zone'); // Holt die Hover-Zone
+            let scrollTimeout; // Variable für den Timeout beim Scrollen
+            let isHovering = false; // Zustand, ob die Maus über der Navbar oder Hover-Zone ist
+            let isInteracting = false; // Zustand, ob mit der Navbar interagiert wird (z.B. Klick)
+
+            navbar.classList.add('navbar-transparent'); // Setzt die anfängliche Klasse der Navbar
+
+            function showNavbar() {
+                navbar.classList.remove('navbar-hidden'); // Zeigt die Navbar an, indem die Klasse 'navbar-hidden' entfernt wird
+            }
+
+            function hideNavbar() {
+                if (!isHovering && !isInteracting) {
+                    navbar.classList.add('navbar-hidden'); // Verbirgt die Navbar, wenn nicht gehovert oder interagiert wird
+                }
+            }
+
+            window.addEventListener('scroll', () => {
+                showNavbar(); // Zeigt die Navbar beim Scrollen sofort an
+
+                if (window.scrollY > 50) {
+                    navbar.classList.remove('navbar-transparent'); // Ändert das Aussehen der Navbar beim Scrollen
+                    navbar.classList.add('navbar-colored'); // Fügt eine farbige Hintergrundklasse hinzu
+                } else {
+                    navbar.classList.remove('navbar-colored'); // Entfernt die farbige Hintergrundklasse
+                    navbar.classList.add('navbar-transparent'); // Fügt die transparente Hintergrundklasse hinzu
+                }
+
+                clearTimeout(scrollTimeout); // Setzt den Timeout zurück, damit die Navbar nicht sofort verschwindet
+                scrollTimeout = setTimeout(() => {
+                    hideNavbar(); // Verzögertes Ausblenden der Navbar nach dem Scrollen
+                }, 2500); // Zeit in Millisekunden, nach der die Navbar ausgeblendet wird
+            });
+
+            hoverZone.addEventListener('mouseenter', () => {
+                isHovering = true; // Setzt den Hover-Zustand
+                showNavbar(); // Zeigt die Navbar an, wenn die Maus in die Hover-Zone eintritt
+            });
+
+            hoverZone.addEventListener('mouseleave', () => {
+                isHovering = false; // Setzt den Hover-Zustand zurück
+            });
+
+            navbar.addEventListener('mouseenter', () => {
+                isHovering = true; // Setzt den Hover-Zustand
+                showNavbar(); // Zeigt die Navbar an, wenn die Maus über die Navbar fährt
+            });
+
+            navbar.addEventListener('mouseleave', () => {
+                isHovering = false; // Setzt den Hover-Zustand zurück
+                setTimeout(() => {
+                    hideNavbar(); // Verzögertes Ausblenden der Navbar, wenn die Maus die Navbar verlässt
+                }, 1500); // Zeit in Millisekunden, nach der die Navbar ausgeblendet wird
+            });
+
+            navbar.addEventListener('mousedown', () => {
+                isInteracting = true; // Setzt den Interaktionszustand beim Klicken auf die Navbar
+            });
+
+            navbar.addEventListener('mouseup', () => {
+                setTimeout(() => {
+                    isInteracting = false; // Setzt den Interaktionszustand zurück, aber verzögert
+                }, 2000); // Zeit in Millisekunden, nach der die Interaktion zurückgesetzt wird
+            });
+        });
+    </script>
+
+</body>
+</html>
