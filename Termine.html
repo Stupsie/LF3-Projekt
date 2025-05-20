@@ -165,18 +165,18 @@
         }
 
         /*  Handy-Ansicht Anpassungen */
-        @media (max-width: 767.98px) {
+       @media (max-width: 767.98px) {
             body {
-                padding-top: 55px; /* Angepasster Platz für die kleinere mobile Navbar */
+                padding-top: 55px;
             }
             .main-content {
-                padding-top: 55px; /* Angepasster oberer Abstand für die kleinere mobile Navbar */
+                padding-top: 55px;
             }
             #hover-zone {
-                display: none; /* Hover-Effekt ist auf Touchscreens nicht relevant */
+                display: none;
             }
             .navbar-brand img {
-                height: 25px; /* Kleineres Logo für Mobilgeräte */
+                height: 25px;
             }
             .navbar-toggler {
                 font-size: 0.8rem;
@@ -189,25 +189,25 @@
                 margin-bottom: 0.25rem;
             }
             footer .container {
-                max-width: 100%; /* Footer nimmt volle Breite ein */
-                padding: 1rem 15px; /* Standard Padding beibehalten */
+                max-width: 100%;
+                padding: 1rem 15px;
             }
             footer .row {
-                display: block; /* Untereinander anzeigen auf Mobilgeräten */
+                flex-direction: column;
                 text-align: center;
+                align-items: center;
             }
             footer .col-md-3,
             footer .col-md-6 {
-                width: 100%; /* Volle Breite für die Spalten auf Mobilgeräten */
+                width: 100%;
                 margin-bottom: 10px;
+                text-align: center;
             }
             footer .list-inline {
-                display: flex;
-                flex-direction: column; /* Links untereinander anordnen */
-                align-items: center; /* Links zentrieren */
+                margin-bottom: 10px;
             }
             footer .list-inline-item {
-                margin: 0.25rem 0; /* Vertikalen Abstand zwischen den Links */
+                margin: 0 0.5rem;
             }
         }
     </style>
