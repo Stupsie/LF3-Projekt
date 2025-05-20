@@ -114,7 +114,7 @@
         }
 
         /* Anpassungen für Mobilgeräte */
-        @media (max-width: 767.98px) {
+          @media (max-width: 767.98px) {
             body {
                 padding-top: 55px; /* Etwas weniger Platz für die Navigationsleiste auf Mobilgeräten */
             }
@@ -151,24 +151,24 @@
             }
 
             footer .row {
-                display: block; /* Zeilenweise Anordnung der Footer-Elemente auf Mobilgeräten */
+                flex-direction: column; /* Spaltenweise Anordnung */
                 text-align: center;
+                align-items: center;
             }
 
             footer .col-md-3,
             footer .col-md-6 {
                 width: 100%; /* Volle Spaltenbreite auf Mobilgeräten */
                 margin-bottom: 10px;
+                text-align: center;
             }
 
             footer .list-inline {
-                display: flex;
-                flex-direction: column; /* Untereinander anordnen der Listenelemente */
-                align-items: center; /* Zentrieren der Listenelemente */
+                margin-bottom: 10px;
             }
 
             footer .list-inline-item {
-                margin: 0.25rem 0; /* Vertikaler Abstand zwischen den Listenelementen */
+                margin: 0 0.5rem;
             }
         }
     </style>
@@ -248,7 +248,7 @@
                     <li class="list-inline-item"><a href="Personalien.HTML" class="nav-link text-muted">Über uns</a></li>
                     <li class="list-inline-item"><a href="Termine.html" class="nav-link text-muted">Termine</a></li>
                     <li class="list-inline-item"><a href="kontakt.html" class="nav-link text-muted">Kontakt</a></li>
-                    <li class="list-inline-item"><a href="Impressum.html" class="nav-link text-muted">Impressum</a></li>
+        
                 </ul>
             </div>
             <div class="col-md-3">
