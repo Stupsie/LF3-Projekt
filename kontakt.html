@@ -18,7 +18,7 @@
         }
         .container {
             margin-top: 4rem; /* Oberen Rand des Containers anpassen */
-            flex-grow: 1; /* Sorgt dafür, dass sich der Container ausdehnt und den verfügbaren Platz einnimmt */
+            flex-grow: 1; /*Container dehnt sich aus*/
             transform: none !important;  /* Verhindert unerwünschte Transformationen */
         }
 
@@ -27,32 +27,32 @@
             position: fixed; /* Fixiert die Navbar am oberen Rand des Bildschirms */
             top: 0;
             width: 100%; /* Volle Bildschirmbreite */
-            z-index: 1031; /* Stellt sicher, dass die Navbar über anderen Elementen liegt */
-            transition: transform 0.4s ease, background-color 0.3s ease; /* Sanfte Übergänge für Animationen */
-            transform: translateY(0) !important; /* Setzt die Navbar an ihre ursprüngliche Position */
+            z-index: 1031; 
+            transition: transform 0.4s ease, background-color 0.3s ease; /* Sanfter Übergang*/
+            transform: translateY(0) !important; /*Setzt die Navbar an ihre anfangs Position*/
         }
         .navbar-transparent {
-            background-color: rgba(248, 249, 250, 0.8) !important; /* Transparenter Hintergrund */
+            background-color: rgba(248, 249, 250, 0.8) !important; /*Transparenter Hintergrund */
         }
         .navbar-colored {
-            background-color: rgba(248, 249, 250, 0.95) !important; /* Leicht transparenter, farbiger Hintergrund */
+            background-color: rgba(248, 249, 250, 0.95) !important; /*Leicht transparenter, farbiger Hintergrund */
         }
         .navbar-hidden {
-            transform: translateY(-100%) !important; /* Schiebt die Navbar aus dem sichtbaren Bereich nach oben */
+            transform: translateY(-100%) !important; /*Schiebt die Navbar aus dem sichtbaren Bereich nach oben, bzw lässt sie verschwinden */
         }
         #hover-zone {
             position: fixed; /* Fixiert die Hover-Zone am oberen Rand */
             top: 0;
             left: 0;
             width: 100%;
-            height: 60px; /* Entspricht der Höhe der Navbar */
-            z-index: 1030; /* Liegt direkt unter der Navbar */
+            height: 60px; /* Höhe der Navbar */
+            z-index: 1030; /* Liegt  unter der Navbar */
             pointer-events: auto; /* Ermöglicht Interaktion mit der Hover-Zone */
             background-color: transparent; /* Unsichtbarer Hintergrund */
             transform: none !important;  /* Verhindert unerwünschte Transformationen */
         }
 
-        /* Footer Styles */
+        /* Footer */
         footer {
             background-color: #f8f9fa; /* Hellgrauer Hintergrund für den Footer */
             padding: 1rem 0; /* Innenabstand oben und unten */
@@ -67,10 +67,10 @@
             transform: none !important;  /* Verhindert unerwünschte Transformationen */
         }
         footer .row {
-            display: flex; /* Flexbox-Layout für die Zeile im Footer */
+            display: flex; /*Layout für die Zeile im Footer */
             justify-content: space-between; /* Verteilt die Elemente horizontal */
             align-items: center; /* Zentriert die Elemente vertikal */
-            flex-wrap: wrap; /* Ermöglicht den Umbruch auf kleineren Bildschirmen */
+            flex-wrap: wrap; /*  Umbruch auf kleineren Bildschirmen */
             transform: none !important;  /* Verhindert unerwünschte Transformationen */
         }
         footer .col-md-3,
@@ -88,7 +88,7 @@
             }
         }
         footer .list-inline {
-            margin-bottom: 0; /* Entfernt den unteren Rand der Liste */
+            margin-bottom: 0; /* Entfernt margin der Liste */
             transform: none !important;  /* Verhindert unerwünschte Transformationen */
         }
         footer .list-inline-item {
@@ -96,17 +96,17 @@
             transform: none !important;  /* Verhindert unerwünschte Transformationen */
         }
         footer a {
-            text-decoration: none; /* Entfernt die Unterstreichung von Links */
+            text-decoration: none; /*Entfernt die Unterstreichung von Links */
             color: #6c757d; /* Graue Farbe für Links */
         }
         footer a:hover {
             color: #000; /* Schwarze Farbe für Links beim Überfahren mit der Maus */
         }
         footer small {
-            color: #6c757d; /* Graue Farbe für den Copyright-Hinweis */
+            color: #6c757d; /*Copyright*/
         }
 
-        /* --- Responsive Anpassungen --- */
+        
         @media (max-width: 767.98px) {
             body {
                 padding-top: 0; /* Kein Padding oben auf kleinen Bildschirmen, um Navbar nicht zu verdecken */
@@ -115,7 +115,7 @@
                 margin-top: 1rem; /* Reduzierter oberer Rand für den Container auf kleinen Bildschirmen */
             }
             #hover-zone {
-                display: none; /* Blendet die Hover-Zone auf kleinen Bildschirmen aus, da Hover-Effekte dort nicht optimal sind */
+                display: none; /*Blendet die Hover-Zone auf kleinen Bildschirmen aus, da Hover-Effekte dort nicht optimal sind */
             }
         }
     </style>
@@ -197,13 +197,13 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const navbar = document.querySelector('.navbar'); // Holt das Navbar-Element
-            const hoverZone = document.getElementById('hover-zone'); // Holt die Hover-Zone
+            const navbar = document.querySelector('.navbar'); // Nimmt das Navbar-Element
+            const hoverZone = document.getElementById('hover-zone'); // Nimmt die Hover-Zone
             let scrollTimeout; // Variable für den Timeout beim Scrollen
             let isHovering = false; // Zustand, ob die Maus über der Navbar oder Hover-Zone ist
             let isInteracting = false; // Zustand, ob mit der Navbar interagiert wird (z.B. Klick)
 
-            navbar.classList.add('navbar-transparent'); // Setzt die anfängliche Klasse der Navbar
+            navbar.classList.add('navbar-transparent'); //Setzt die anfaengliche Klasse der Navbar
 
             function showNavbar() {
                 navbar.classList.remove('navbar-hidden'); // Zeigt die Navbar an, indem die Klasse 'navbar-hidden' entfernt wird
@@ -233,21 +233,21 @@
             });
 
             hoverZone.addEventListener('mouseenter', () => {
-                isHovering = true; // Setzt den Hover-Zustand
+                isHovering = true; // Setzt den Hover Zustand
                 showNavbar(); // Zeigt die Navbar an, wenn die Maus in die Hover-Zone eintritt
             });
 
             hoverZone.addEventListener('mouseleave', () => {
-                isHovering = false; // Setzt den Hover-Zustand zurück
+                isHovering = false; // Setzt den Hover Zustand zurück
             });
 
             navbar.addEventListener('mouseenter', () => {
-                isHovering = true; // Setzt den Hover-Zustand
-                showNavbar(); // Zeigt die Navbar an, wenn die Maus über die Navbar fährt
+                isHovering = true; // Setzt den Hover Zustand
+                showNavbar(); // Zeigt die Navbar an, wenn die Maus über die Navbar faehrt
             });
 
             navbar.addEventListener('mouseleave', () => {
-                isHovering = false; // Setzt den Hover-Zustand zurück
+                isHovering = false; // Setzt den Hover Zustand zurück
                 setTimeout(() => {
                     hideNavbar(); // Verzögertes Ausblenden der Navbar, wenn die Maus die Navbar verlässt
                 }, 1500); // Zeit in Millisekunden, nach der die Navbar ausgeblendet wird
