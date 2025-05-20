@@ -10,16 +10,16 @@
         
         body {
             padding-top: 60px; /* Navbar-Höhe anpassen */
-            display: flex; /* Flexbox-Layout */
-            flex-direction: column; /* Inhalt vertikal anordnen */
-            min-height: 100vh; /* Mindesthöhe des Bodys */
+            display: flex; 
+            flex-direction: column; /*Inhalt vertikal anordnen */
+            min-height: 100vh; /*Mindesthöhe des Bodys */
         }
         .container {
             margin-top: 2rem; /* Oberen Rand anpassen */
             flex-grow: 1; /* Container dehnt sich aus */
         }
 
-        /*  Footer Styles */
+        /*  Footer */
         footer {
             background-color: #f8f9fa; /* Hellgrauer Hintergrund */
             padding: 1rem 0; /* Innenabstand oben und unten */
@@ -33,10 +33,10 @@
             padding: 1rem 15px; /* Innenabstand */
         }
         footer .row {
-            display: flex; /* Flexbox-Layout für Zeile */
+            display: flex; /*Layout für die Zeile */
             justify-content: space-between; /* Elemente verteilen */
-            align-items: center; /* Vertikal zentrieren */
-            flex-wrap: wrap; /* Umbruch bei Bedarf */
+            align-items: center; /*  zentrieren */
+            flex-wrap: wrap; /* Umbruch  */
         }
         footer .col-md-3,
         footer .col-md-6 {
@@ -45,10 +45,10 @@
         }
         @media (min-width: 768px) {
             footer .col-md-3 {
-                text-align: left; /* Linksbündig für größere Bildschirme */
+                text-align: left; /* Linksbündig für groeßere Bildschirme */
             }
             footer .col-md-6 {
-                text-align: center; /* Zentriert für größere Bildschirme */
+                text-align: center; /* Zentriert für groeßere Bildschirme */
             }
         }
         footer .list-inline {
@@ -62,31 +62,31 @@
             color: #6c757d; /* Graue Farbe */
         }
         footer a:hover {
-            color: #000; /* Schwarz beim Überfahren */
+            color: #000; /* Schwarz beim hovern */
         }
         footer small {
-            color: #6c757d; /* Graue Farbe für Copyright */
+            color: #6c757d; /*Copyright */
         }
 
-        /* --- Responsive Anpassungen --- */
+        /*Handy ansicht*/
         @media (max-width: 767.98px) {
             body {
-                padding-top: 55px; /* Kleinere Navbar-Höhe für Mobilgeräte */
+                padding-top: 55px; /* Kleinere Navbar-hoehe für Mobilgeraete */
             }
             .container {
-                margin-top: 1rem; /* Verringerter oberer Rand für Mobilgeräte */
+                margin-top: 1rem; /* Verringerter oberer Rand für Mobilgeraete */
             }
             footer .container {
-                max-width: 100%; /* Volle Breite auf Mobilgeräten */
-                padding: 1rem 15px; /* Innenabstand auf Mobilgeräten */
+                max-width: 100%; /* Volle Breite auf Mobilgeraeten */
+                padding: 1rem 15px; /* Innenabstand auf Mobilgeraeten */
             }
             footer .row {
-                display: block; /* Als Block anzeigen für Mobilgeräte */
-                text-align: center; /* Text zentrieren auf Mobilgeräten */
+                display: block; /* Als Block anzeigen für Mobilgeraete */
+                text-align: center; /* Text zentrieren auf Mobilgeraeten */
             }
             footer .col-md-3,
             footer .col-md-6 {
-                width: 100%; /* Volle Breite auf Mobilgeräten */
+                width: 100%; /* Volle Breite auf Mobilgeraeten */
                 margin-bottom: 10px; /* Abstand unterhalb der Spalten */
             }
             footer .col-md-3:first-child {

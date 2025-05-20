@@ -19,22 +19,22 @@
         }
 
         .navbar-transparent {
-            /* macht den Hintergrund der Navigationsleiste anfänglich transparent */
+            /* Navbar  transparent */
             background-color: rgba(248, 249, 250, 0.8) !important;
         }
 
         .navbar-colored {
-            /* definiert die Hintergrundfarbe der Navigationsleiste beim Scrollen */
+            /* Hintergrundfarbe der Navbar beim Scrollen */
             background-color: rgba(248, 249, 250, 0.95) !important;
         }
 
         .navbar-hidden {
-            /* blendet die Navigationsleiste komplett aus */
+            /* blendet die Navbar aus */
             transform: translateY(-100%);
         }
 
         #hover-zone {
-            /* ein unsichtbarer Bereich, der das Einblenden der Navigationsleiste beim Überfahren mit der Maus auslöst */
+            /* Eine "zone" um die Navbar anzuzeigen */
             position: fixed;
             top: 0;
             left: 0;
@@ -53,7 +53,7 @@
         }
 
         .info-container {
-            /* umfasst die Info-Blöcke und zentriert sie */
+            /* umfasst die Blöcke und zentriert sie */
             max-width: 1200px;
             margin: 20px auto;
             padding: 20px;
@@ -65,21 +65,21 @@
         }
 
         .card .row {
-            /* stellt sicher, dass die Elemente in der Karte als Zeile angeordnet sind */
+            /* stellt sicher, dass die Elemente in der Karte als Zeile angeordnet sind*/
             display: flex;
             flex-direction: row;
             align-items: center;
         }
 
         .col-md-6 {
-            /* definiert die Breite der Spalten in den Info-Blöcken */
+            /* definiert die Breite der Spalten in den Blöcken */
             flex: 1;
             padding-left: 15px;
             padding-right: 15px;
         }
 
         .img-container {
-            /* begrenzt und zentriert die Bilder in den Info-Blöcken */
+            /* begrenzt und zentriert die Bilder in den Blöcken */
             height: 350px;
             overflow: hidden;
             display: flex;
@@ -88,7 +88,7 @@
         }
 
         .img-fluid {
-            /* macht die Bilder responsiv und skaliert sie */
+            /* Bilder sind flexibel und es wird skaliert*/
             width: auto;
             max-height: 100%;
             max-width: 100%;
@@ -97,12 +97,12 @@
         }
 
         .card-body {
-            /* definiert den Innenabstand für den Textbereich der Karte */
+            /*definiert den Innenabstand für den Textbereich der Karte */
             padding: 1.5rem;
         }
 
         .btn-lg {
-            /* definiert das Aussehen der großen Buttons */
+            /* definiert das Aussehen der Buttons */
             font-size: 1.1rem;
             padding: 0.75rem 1.5rem;
         }
@@ -151,7 +151,7 @@
         }
 
         footer .list-inline {
-            /* entfernt den Standardabstand von Listen */
+            /* entfernt das Margin */
             margin-bottom: 0;
         }
 
@@ -161,18 +161,18 @@
         }
 
         footer a {
-            /* gestaltet die Links im Footer */
+            /* Links im footer bearbeiten, die farbe und die Text-Dekoration */
             text-decoration: none;
             color: #6c757d;
         }
 
         footer a:hover {
-            /* definiert den Hover-Effekt für Links im Footer */
+            /* Hover-Effekt für Links im Footer */
             color: #000;
         }
 
         footer small {
-            /* formatiert den Copyright-Hinweis im Footer */
+            /*Copyright*/
             color: #6c757d;
         }
 
@@ -464,7 +464,7 @@
 </footer>
 
 <script>
-    /* Skript zur Steuerung der Navigationsleiste beim Scrollen und Interagieren */
+    /*  Navbar beim Scrollen und Interagieren */
     document.addEventListener('DOMContentLoaded', function () {
         const navbar = document.querySelector('.navbar');
         const hoverZone = document.getElementById('hover-zone');
@@ -476,27 +476,27 @@
         navbar.classList.add('navbar-transparent');
 
         function showNavbar() {
-            /* zeigt die Navigationsleiste an */
+            /* zeigt die Navbar an */
             navbar.classList.remove('navbar-hidden');
         }
 
         function hideNavbar() {
-            /* versteckt die Navigationsleiste, wenn weder Hover noch Interaktion vorliegen */
+            /* versteckt die Navbar, wenn weder Hover noch Interaktion vorliegen */
             if (!isHovering && !isInteracting) {
                 navbar.classList.add('navbar-hidden');
             }
         }
 
-        /* Scroll-Logik zum Ein- und Ausblenden der Navigationsleiste */
+        /* zum Ein- und Ausblenden der Navbar beim scrollen */
         window.addEventListener('scroll', () => {
             showNavbar();
 
             if (window.scrollY > 50) {
-                /* ändert die Farbe der Navigationsleiste beim Scrollen */
+                /* ändert die Farbe der Navbar beim scrollen */
                 navbar.classList.remove('navbar-transparent');
                 navbar.classList.add('navbar-colored');
             } else {
-                /* setzt die Farbe der Navigationsleiste auf transparent */
+                /* setzt die Farbe der Navbar auf transparent */
                 navbar.classList.remove('navbar-colored');
                 navbar.classList.add('navbar-transparent');
             }
@@ -507,7 +507,7 @@
             }, 2500);
         });
 
-        /* Hover-Effekt für die Navigationsleiste (nur für Maus) */
+        /* Hover-Effekt für die Navbar, nur für Maus */
         hoverZone.addEventListener('mouseenter', () => {
             isHovering = true;
             showNavbar();
@@ -517,7 +517,7 @@
             isHovering = false;
         });
 
-        /* Interaktionen mit der Navigationsleiste (Maus und Touch) */
+        /* Interaktionen mit der Navigationsleiste für die Maus und  das Touchen über dem Handy */
         navbar.addEventListener('mouseenter', () => {
             isHovering = true;
             showNavbar();

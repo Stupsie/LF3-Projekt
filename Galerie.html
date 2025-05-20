@@ -7,15 +7,15 @@
     <link rel="icon" href="Logo.ico" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
     <style>
-        /* Stile und Navbar*/
+        
         /* Navbar */
         .navbar {
             position: fixed; /* Feste Positionierung */
             top: 0;
             width: 100%;
             z-index: 1031; /* Über anderen Elementen */
-            transition: transform 0.4s ease, background-color 0.3s ease; /* Sanfte Übergänge */
-            transform: translateY(0); /* Startposition: sichtbar */
+            transition: transform 0.4s ease, background-color 0.3s ease; /* leichte Übergänge */
+            transform: translateY(0); /* Startposition */
         }
 
         .navbar-transparent {
@@ -23,7 +23,7 @@
         }
 
         .navbar-colored {
-            background-color: rgba(248, 249, 250, 0.95) !important; /* Farbig beim Scrollen */
+            background-color: rgba(248, 249, 250, 0.95) !important; /* Farbe beibehalten beim scrollen */
         }
 
         .navbar-hidden {
@@ -31,17 +31,17 @@
         }
 
         #hover-zone {
-            position: fixed; /* Für Hover-Effekt über der Navbar */
+            position: fixed; /* Für Hover-Effekt bei der Navbar */
             top: 0;
             left: 0;
             width: 100%;
             height: 60px;
-            z-index: 1030; /* Unter der Navbar */
+            z-index: 1030; 
             pointer-events: auto; /* Reagiert auf Mausbewegungen */
             background-color: transparent; /* Unsichtbar */
         }
 
-        /* Karussell-Stile */
+        /*Karussell  */
         .carousel-item img {
             object-fit: contain; /* Bildanpassung beibehalten */
             max-height: 400px; /* Maximale Höhe */
@@ -50,11 +50,11 @@
 
         @media (max-width: 767.98px) {
             .carousel-item img {
-                max-height: 300px; /* Kleinere max. Höhe für Mobilgeräte */
+                max-height: 300px; /*kleinere maximale hoehe für Mobilgeraete */
             }
         }
 
-        /* --- Sticky Footer Styles --- */
+        /*Footer */
         body {
             display: flex;
             flex-direction: column;
@@ -65,16 +65,16 @@
             flex: 1; /* Hauptinhalt dehnt sich aus */
         }
 
-        /* Footer */
+        
         footer {
-            background-color: #f8f9fa; /* Heller Hintergrund */
+            background-color: #f8f9fa; /*hellerer Hintergrund*/
             padding: 1rem 0;
-            margin-top: 3rem; /* Abstand zum Hauptinhalt */
+            margin-top: 3rem; /*Abstand zum Hauptinhalt */
             text-align: center;
         }
 
         footer .container {
-            max-width: 1200px; /* Maximale Breite des Containers */
+            max-width: 1200px; /*Maximale Breite des Containers */
             padding: 0 15px;
         }
 
@@ -85,7 +85,7 @@
         }
 
         footer .list-inline {
-            margin-bottom: 0; /* Entfernt Standard-Margin */
+            margin-bottom: 0; /*entfernt das Margin */
         }
 
         footer .list-inline-item {
@@ -93,16 +93,16 @@
         }
 
         footer a {
-            text-decoration: none; /* Entfernt Unterstreichung */
+            text-decoration: none; /*entfernt die Unterstreichung*/
             color: #6c757d;
         }
 
         footer a:hover {
-            color: #000; /* Farbe bei Mausberührung */
+            color: #000; /* Farbe bei der Mausberührung */
         }
 
         footer small {
-            color: #6c757d; /* Farbe für Copyright-Hinweis */
+            color: #6c757d; /* Copyright */
         }
 
         @media (max-width: 768px) {
@@ -112,7 +112,7 @@
             }
 
             footer .col-md-3, footer .col-md-6 {
-                width: 100%; /* Volle Breite auf Mobilgeräten */
+                width: 100%; /*Volle Breite auf Mobilgereaten*/
                 margin-bottom: 10px;
             }
 
@@ -128,7 +128,7 @@
 </head>
 <body>
     <div id="hover-zone"></div> 
-    <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top"> <!--Navbar Anfang-->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top"> <!--Anfang der Navbar-->
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
                 <img src="Folk_Four_Fun_Logo.png" alt="Folk4Fun Logo" height="30">
@@ -168,7 +168,7 @@
         </div>
     </nav>
     
-    <main class="main-content">  <!--Karussel Anfang-->
+    <main class="main-content">  <!--Anfang von den Karussel-->
         <br>
         <br>
          <div class="container mt-5 text-center">
@@ -237,7 +237,7 @@
     </main>
 
     <style>
-        /* Fullscreen Overlay */
+        /* Vollbild*/
         .fullscreen-overlay {
             position: fixed; /* Volle Bildschirmabdeckung */
             top: 0;
@@ -245,15 +245,15 @@
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.9); /* Dunkler Hintergrund */
-            z-index: 1000; /* Über allen anderen Elementen */
+            z-index: 1000; 
             display: flex;
             justify-content: center; /* Zentrierung */
             align-items: center;
-            cursor: pointer; /* Cursorhinweis */
+            cursor: pointer; /* Cursorhinweis bzw. Mausverändert sich*/
         }
 
         .fullscreen-overlay img {
-            max-width: 90%; /* Maximale Bildgröße */
+            max-width: 90%; /*Maximale Bildgröße */
             max-height: 90%;
             object-fit: contain; /* Skalierung beibehalten */
         }
@@ -273,7 +273,7 @@
             let inactivityTimer;
             let isFullscreenOpen = false;
 
-            // --- Auto-Slide Funktionen ---
+            // Automatischer Bilder wechsel
             function startAutoSlide() {
                 if (!isFullscreenOpen) {
                     autoSlideInterval = setInterval(() => {
@@ -291,17 +291,17 @@
                 inactivityTimer = setTimeout(startAutoSlide, inactivityTimeout); // Timer starten
             }
 
-            startAutoSlide(); // Auto-Slide starten
+            startAutoSlide(); // Automatischer Bilder wechsel starten
             resetInactivityTimer(); // Timer starten
 
-            // --- Event Listener für Karussell-Interaktion ---
+            // Events für das Karussel
             indicators.addEventListener('click', () => {
                 stopAutoSlide();
                 resetInactivityTimer(); // Timer zurücksetzen
             });
 
             carousel.addEventListener('mouseenter', () => {
-                stopAutoSlide(); // Auto-Slide stoppen
+                stopAutoSlide(); // Automatischer Bilder wechsel stoppen
                 clearTimeout(inactivityTimer);
             });
 
@@ -314,11 +314,11 @@
                 return Array.from(carouselItems).indexOf(activeItem);
             }
 
-            // --- Fullscreen-Funktionalität ---
+            //Fullscreen-Funktionalität
             carouselImages.forEach(img => {
                 img.addEventListener('click', function() {
                     isFullscreenOpen = true;
-                    stopAutoSlide(); // Auto-Slide stoppen
+                    stopAutoSlide(); //Automatischer Bilder wechsel stoppen
 
                     currentIndex = getActiveIndex();
                     const overlay = document.createElement('div');
