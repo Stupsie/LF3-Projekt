@@ -7,7 +7,7 @@
     <link rel="icon" href="Logo.ico" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        /* Globale Stile*/
+        /*  Stile*/
         body {
             overflow-x: hidden; /* Verhindert horizontalen Scrollbalken */
         }
@@ -16,7 +16,7 @@
         @keyframes fadeIn {
             from {
                 opacity: 0; /* Startet mit Transparenz 0 */
-                transform: translateY(10px); /* Startet 10px unterhalb der normalen Position */
+                transform: translateY(10px); /* Startet 10px unter  der  Position */
             }
             to {
                 opacity: 1; /* Endet mit voller Deckkraft */
@@ -24,7 +24,7 @@
             }
         }
 
-        /* Personalien-Eintrag Stile*/
+        /* Personalien Eintrag Stile*/
         .personalien-eintrag {
             opacity: 0; /* Startet mit Transparenz 0 */
             animation: fadeIn 1s ease-in-out forwards; /* Fügt die fadeIn-Animation hinzu */
@@ -59,8 +59,8 @@
             position: fixed; /* Fixiert die Navbar am oberen Rand */
             top: 0; /* Positioniert am oberen Rand */
             width: 100%; /* Volle Breite des Viewports */
-            z-index: 1031; /* Hoher Z-Index, um über anderen Elementen zu liegen */
-            transition: transform 0.4s ease, background-color 0.3s ease; /* Sanfte Übergänge für Transformation und Hintergrundfarbe */
+            z-index: 1031; 
+            transition: transform 0.4s ease, background-color 0.3s ease; /* Sanfte Übergänge */
             transform: translateY(0); /* Startposition */
         }
 
@@ -73,7 +73,7 @@
         }
 
         .navbar-hidden {
-            transform: translateY(-100%); /* Nach oben aus dem Viewport schieben */
+            transform: translateY(-100%); /* Nach oben aus dem Bildschirm schieben */
         }
 
         #hover-zone {
@@ -87,11 +87,11 @@
             background-color: transparent; /* Transparenter Hintergrund */
         }
 
-        /* --- Modal Stile --- */
-        .modal {
+        /*  Modal Stile */
+  .modal {
             display: none; /* Standardmäßig nicht anzeigen */
             position: fixed; /* Fixiert das Modal im Viewport */
-            z-index: 1; /* Sehr hoher Z-Index */
+            z-index: 2000; /* Hoeher als Navbar */
             left: 0;
             top: 0;
             width: 100%; /* Volle Breite */
@@ -138,7 +138,7 @@
             text-decoration: none; /* Keine Unterstreichung */
         }
 
-        /* --- Media Query für Mobilgeräte --- */
+        /*  Media Query für Mobilgeräte  */
         @media (max-width: 768px) {
             .personalien-eintrag {
                 flex-direction: column; /* Stapelt die Elemente untereinander */
