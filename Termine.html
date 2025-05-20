@@ -203,11 +203,16 @@
                 margin-bottom: 10px;
                 text-align: center;
             }
-            footer .list-inline {
+                footer .list-inline {
                 margin-bottom: 10px;
+                display: flex !important;         
+                flex-direction: row !important;   
+                justify-content: center;          
+                flex-wrap: wrap;                  
             }
             footer .list-inline-item {
                 margin: 0 0.5rem;
+                display: inline-block !important; /* <-- Hinzufügen */
             }
         }
     </style>
